@@ -1,0 +1,138 @@
+****************
+* CircuitTracer
+* CS 221-2
+* 12/6/2018
+* Devan Craig
+**************** 
+
+OVERVIEW:
+
+ CircuitTracer is method that reads in either a stack or a queue 
+ from the command line along with reading in a GUI or Console 
+ display output. It lastly will read in a input file that is 
+ read in from CircuitBoard.java. From the file it will create 
+ best paths based on the format given from the command line. 
+
+
+INCLUDED FILES:
+
+ IUDoubleLinkedList.java - source file
+ CircuitTracerTester.java - source file
+ CircuitTracer.java - source file
+ CircuitBoard.java - source file
+ Storage.java - source file
+ TraceState.java - source file
+ InvalidFileFormatException.java - source file
+ OccupiedPostionException.java - source file
+ README - this file
+ valid.dat and invalid.dat - text files
+
+
+BUILDING AND RUNNING:
+
+ From the directory containing all source files, compile the test
+ class (and all dependent classes) with the command:
+ $ javac CircuitTracerTester.java
+
+ Run the compiled ListTester class with the command:
+ $ java CircuitTracerTester
+
+ Console output will report which tests CircuitTracer and CircuitBoard passed or failed.
+ 
+
+PROGRAM DESIGN:
+
+ The main class for this project was based around the CirciutTracer class. The 
+ class was used to implement command line arguments with a person picking between
+ two storage types (Stack or Queue), two display types(GUI or Console) and lastly 
+ a input file. With that running smoothly I had to build the search algorithm. The
+ search algorithm was used in a combination with the method in circuit board called
+ adjacent points. The adjacent points method builds a grid and looks at points adjacent
+ to each other to put together a path. I used this method in the search algorithm 
+ to build all the possible paths to come up with of the best paths.
+ 
+ The Circuit board class on the other hand was used to parse in files, then would
+ build a grid to determine whether or not it was a valid file or not. If it was a
+ valid file there would be no exceptions thrown and the file would be properly parsed.
+ If it was a invalid file being parsed in it would throw an exception and would then print
+ out a message to the console saying what exception was thrown.  
+  
+
+TESTING:
+ 
+ CircuitTracerTester is a class used to test CircuitTracer and CircuitBoard.
+ CircuitTracerTester was a given test class to test CiruitTracer and CiruitBoard
+ and make sure the program worked properly.
+ 
+ Testing currently at 100% with 82 change scenarios.
+ 
+ Another way that I used to test these classes was with a driver class. In the
+ driver class I test two things. First was to see when my program would break in
+ CircuitBoard class when testing files. Second I used the driver to test 
+ to make sure my try catch block in circuit tracer was correctly passing in 
+ the storage type, display type and the file.  
+   
+DISCUSSION:
+ 
+ My first struggles came from the Circuit Board class. It started with testing 
+ to make sure the file would pass or fail. I was instantly passing most of the 
+ valid files, but when it came to invalid files I was failing almost every
+ single one. That confused me for a little, but then I finally started to add 
+ exceptions in so that they would start to not fail. After looking at some of the invalid
+ files I figured out what exception would be needed to pass each test. This took 
+ me awhile, but I felt like at the end I became pretty good at where I put my
+ exceptions at and how they worked to make these test pass. The file that gave 
+ me the most trouble was invalid6 which kept giving me null pointer exception in 
+ the test class. What I finally figured out was to compare whether or not the rows
+ and columns match the ones that where passed in from the file. If they where not 
+ the same then an exception was thrown.
+ 
+ In the CircuitTracer I had one main struggles, first being parsing in 
+ the correct command line arguments. My first attempted used a for loop that kept 
+ track of the number of arguments that I was on. After that wasn't working I tried
+ to create the logic for it without using any loops. I already had a place
+ holder from the main which was held args (Command args). Once I realized this, it quickly 
+ became apparent to what the solution was.   
+ 
+Analysis:
+ 
+ How does the choice of Storage configuration (stack vs queue) affect the sequence 
+ in which paths are explored in the search algorithm? (This requires more than a 
+ "stacks are LIFOs and queues are FIFOs" answer.)
+  
+  -In a stack storage you would start from the bottom of the tree of best paths. From the bottom
+  it would be looking at all the worst paths to eventually get to the best paths. The
+  queue on the other hand would be looking at the top of the tree and look down branch
+  by branch looking for best paths. Both would be almost equally as fast as one another, 
+  however if there wasn't a lot of bad paths then I believe the stack would be quicker to find the 
+  best paths. 
+  
+ Is the total number of search states (possible paths) affected by the choice of stack or queue?
+ 
+  -If there wasn't a whole lot of bad paths branching at the bottom I believe that the stack would be 
+  slightly quicker. Overall I believe they are both equally efficient in most cases. 
+  
+ How is memory use (the maximum number of states in Storage at one time) affected by the choice of underlying structure?
+ 
+  -The memory is affected by the size of the tree. If you have a big grid with a lot of different path to find a 
+  solution it would take longer for both stack and queue. This is where they could differ however, because the
+  stack could be more efficient in a bigger grid.
+  
+  What is the Big-Oh runtime for the search algorithm? Does it reflect the maximum size of Storage? Does it reflect the number of 
+  board positions? Does it reflect the number of paths explored? Does it reflect the maximum path length? Is it something else?
+  
+   -The Big-Oh runtime that I ended up getting was n^3. This reflects the maximum size of storage because it's fast at small 
+   grids, but will slows down quickly during much larger grids. The reason that it becomes slower as the grid size increases is 
+   because the number of paths will increase based on how many board positions. The big-oh does reflect the maximum path 
+   length because you can see at some point, there will be a grid that just becomes to big to run in a real world situation.
+   The size of the board that would cause this would end up being the max path length. 
+  
+  Does using one of the storage structures usually find a solution in fewer steps than the other? Always?
+   
+   -Using different storage structures for me hasn't changed the time in which in takes to find the solution. 
+   
+  Does using either of the storage structures guarantee that the first solution found will be a shortest path?
+  
+   -No matter which storage structure you use you it will always be the same to find the shortest path. That's
+   because the stack and queue are used for looking at the paths after they've already been created. 
+ 
