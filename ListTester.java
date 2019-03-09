@@ -19,7 +19,7 @@ public class ListTester {
 	};
 
 	// TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
-	private final static ListToUse LIST_TO_USE = ListToUse.singleLinkedList;
+	private final static ListToUse LIST_TO_USE = ListToUse.doubleLinkedList;
 
 	// possible results expected in tests
 	private enum Result {
@@ -175,12 +175,21 @@ public class ListTester {
 		testSingleElementList(emptyList_addToFrontA_A, "emptyList_addToFrontA_A", LIST_A, STRING_A);
 		testSingleElementList(emptyList_addToRearA_A, "emptyList_addToRearA_A", LIST_A, STRING_A);
 		testSingleElementList(emptyList_add0A_A, "emptyList_add0A_A", LIST_A, STRING_A);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testSingleElementList(emptyList_listIterAddA_A,"emptyList_listIterAddA_A",LIST_A, STRING_A);
+		}
 		// 1-element to empty list
 		testEmptyList(A_removeFirst_emptyList, "A_removeFirst_emptyList");
 		testEmptyList(A_removeLast_emptyList, "A_removeLast_emptyList");
 		testEmptyList(A_removeA_emptyList, "A_removeA_emptyList");
 		testEmptyList(A_remove0_emptyList, "A_remove0_emptyList");
 		testEmptyList(A_iterRemoveAfterNextA_emptyList, "A_iterRemoveAfterNextA_emptyList");
+		if(SUPPORTS_LIST_ITERATOR) {
+			testEmptyList(A_ListIterRemoveAfterNextA_emptyList,"A_ListIterRemoveAfterNextA_emptyList");
+			testEmptyList(A_listIter1RemoveAfterPrevious_emptyList,"A_listIter1RemoveAfterPrevious_emptyList");
+			
+			
+		}
 		
 		// 1-element to 2-element
 		testTwoElementList(A_addToRearB_AB, "A_addToRearB_AB", LIST_AB, STRING_AB);
@@ -189,8 +198,19 @@ public class ListTester {
 		testTwoElementList(A_addB_AB, "A_addB_AB", LIST_AB, STRING_AB);
 		testTwoElementList(A_add0B_BA, "A_add0B_BA", LIST_BA, STRING_BA);
 		testTwoElementList(A_add1B_AB, "A_add1B_AB", LIST_AB, STRING_AB);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testTwoElementList(A_listIterAddB_BA , "A_listIterAddB_BA ", LIST_BA, STRING_BA);
+			testTwoElementList(A_listIterAddAfterNextB_AB, "A_listIterAddAfterNextB_AB", LIST_AB, STRING_AB);
+			testTwoElementList(A_listIter1AddAfterPrevA_BA, "A_listIter1AddAfterPrevA_BA", LIST_BA, STRING_BA);
+			
+		}
 		// 1-element to changed 1-element via set()
 		testSingleElementList(A_set0B_B, "A_set0B_B", LIST_B, STRING_B);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testSingleElementList(A_listIterSetB_B , "A_listIterSetB_B ", LIST_B, STRING_B);
+			testSingleElementList(A_ListIterSetAfterNextB_B , "A_ListIterSetAfterNextB_B", LIST_B, STRING_B);
+			
+		}
 		// 2-element to 1-element
 		testSingleElementList(AB_removeFirst_B, "AB_removeFirst_B", LIST_B, STRING_B);
 		testSingleElementList(AB_removeLast_A, "AB_removeLast_A", LIST_A, STRING_A);
@@ -200,6 +220,12 @@ public class ListTester {
 		testSingleElementList(AB_remove1_A, "AB_remove1_A", LIST_A, STRING_A);
 		testSingleElementList(AB_iterRemoveAfterNextA_B, "AB_iterRemoveAfterNextA_B", LIST_B, STRING_B);
 		testSingleElementList(AB_iterRemoveAfterNextB_A, "AB_iterRemoveAfterNextB_A", LIST_A, STRING_A);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testSingleElementList(AB_ListIterRemoveAfterNextA_B,"AB_ListIterRemoveAfterNextA_B",LIST_B, STRING_B);
+			testSingleElementList(AB_ListIterRemoveAfterNextB_A,"AB_ListIterRemoveAfterNextB_A",LIST_A, STRING_A);
+			testSingleElementList(AB_listIter2RemoveAfterPrevious_A ,"AB_listIter2RemoveAfterPrevious_A ",LIST_A, STRING_A);
+			testSingleElementList(AB_listIter1RemoveAfterPrevious_B,"AB_listIter1RemoveAfterPrevious_B",LIST_B, STRING_B);
+		}
 		// 2-element to 3-element
 		testThreeElementList(AB_addToFrontC_CAB, "AB_addToFrontC_CAB", LIST_CAB, STRING_CAB);
 		testThreeElementList(AB_addToRearC_ABC, "AB_addToRearC_ABC", LIST_ABC, STRING_ABC);
@@ -209,9 +235,23 @@ public class ListTester {
 		testThreeElementList(AB_add0C_CAB, "AB_add0C_CAB", LIST_CAB, STRING_CAB);
 		testThreeElementList(AB_add1C_ACB, "AB_add1C_ACB", LIST_ACB, STRING_ACB);
 		testThreeElementList(AB_add2C_ABC, "AB_add2C_ABC", LIST_ABC, STRING_ABC);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testThreeElementList(AB_listIter1AddC_ACB,"AB_listIter1AddC_ACB", LIST_ACB, STRING_ACB);
+			testThreeElementList(AB_ListIterAddAfterNextC_CAB, "AB_ListIterAddAfterNextC_CAB", LIST_CAB, STRING_CAB);
+			testThreeElementList(AB_ListIterAddAfterNextC_ACB, "AB_ListIterAddAfterNextC_ACB", LIST_ACB, STRING_ACB);
+			testThreeElementList(AB_ListIterAddAfterNextC_ABC, "AB_ListIterAddAfterNextC_ABC", LIST_ABC, STRING_ABC);
+			testThreeElementList(AB_ListIterAddAfterPrevC_CAB, "AB_ListIterAddAfterPrevC_CAB", LIST_CAB, STRING_CAB);
+			testThreeElementList(AB_ListIter2AddAfterPrevC_ACB, "AB_ListIter2AddAfterPrevC_ACB", LIST_ACB, STRING_ACB);
+		}
 		// 2-element to changed 2-element via set()
 		testTwoElementList(AB_set0C_CB, "AB_set0C_CB", LIST_CB, STRING_CB);
 		testTwoElementList(AB_set1C_AC, "AB_set1C_AC", LIST_AC, STRING_AC);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testTwoElementList(AB_listIterSetCAfterNext_CB, "AB_listIterSetCAfterNext_CB", LIST_CB, STRING_CB);
+			testTwoElementList(AB_listIterSetCAfterNext2_AC, "AB_listIterSetCAfterNext2_AC", LIST_AC, STRING_AC);
+			testTwoElementList(AB_listIterSetCAfterPrev_CB, "AB_listIterSetCAfterPrev_CB", LIST_CB, STRING_CB);
+			testTwoElementList(AB_listIterSetCAfterPrev2_AC, "AB_listIterSetCAfterPrev2_AC", LIST_AC, STRING_AC);
+		}
 		// 3-element to 2-element
 		testTwoElementList(ABC_removeFirst_BC, "ABC_removeFirst_BC", LIST_BC, STRING_BC);
 		testTwoElementList(ABC_removeLast_AB, "ABC_removeLast_AB", LIST_AB, STRING_AB);
@@ -224,11 +264,29 @@ public class ListTester {
 		testTwoElementList(ABC_iterRemoveAfterNextA_BC, "ABC_iterRemoveAfterNextA_BC", LIST_BC, STRING_BC);
 		testTwoElementList(ABC_iterRemoveAfterNextB_AC, "ABC_iterRemoveAfterNextB_AC", LIST_AC, STRING_AC);
 		testTwoElementList(ABC_iterRemoveAfterNextC_AB, "ABC_iterRemoveAfterNextC_AB", LIST_AB, STRING_AB);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testTwoElementList(ABC_ListIterRemoveAfterNextA_BC, "ABC_ListIterRemoveAfterNextA_BC", LIST_BC, STRING_BC);
+			testTwoElementList(ABC_ListIterRemoveAfterNextB_AC, "ABC_ListIterRemoveAfterNextB_AC", LIST_AC, STRING_AC);
+			testTwoElementList(ABC_ListIterRemoveAfterNextC_AB, "ABC_ListIterRemoveAfterNextC_AB", LIST_AB, STRING_AB);
+			testTwoElementList(ABC_listIter1RemoveAfterPrevious_BC, "ABC_listIter1RemoveAfterPrevious_BC", LIST_BC, STRING_BC);
+			testTwoElementList(	ABC_listIter2RemoveAfterPrevious_AC, "ABC_listIter2RemoveAfterPrevious_AC", LIST_AC, STRING_AC);
+			testTwoElementList(ABC_listIter3RemoveAfterPrevious_AB, "ABC_listIter3RemoveAfterPrevious_AB", LIST_AB, STRING_AB);
 		
+		}
 		// 3-element to changed 3-element via set()
 		testThreeElementList(ABC_set0D_DBC, "ABC_set0D_DBC", LIST_DBC, STRING_DBC);
 		testThreeElementList(ABC_set1D_ADC, "ABC_set1D_ADC", LIST_ADC, STRING_ADC);
 		testThreeElementList(ABC_set2D_ABD, "ABC_set2D_ABD", LIST_ABD, STRING_ABD);
+		if(SUPPORTS_LIST_ITERATOR) {
+			testThreeElementList(ABC_listIterSetDAfterNext_DBC, "ABC_listIterSetDAfterNext_DBC", LIST_DBC, STRING_DBC);
+			testThreeElementList(ABC_listIterSetDAfterNext2_ADC, "ABC_listIterSetDAfterNext2_ADC", LIST_ADC, STRING_ADC);
+			testThreeElementList(ABC_listIterSetDAfterNext3_ABD, "ABC_listIterSetDAfterNext3_ABD", LIST_ABD, STRING_ABD);
+			testThreeElementList(ABC_listIterSetCAfterPrev_DBC, "ABC_listIterSetCAfterPrev_DBC", LIST_DBC, STRING_DBC);
+			testThreeElementList(ABC_listIterSetCAfterPrev2_ADC, "ABC_listIterSetCAfterPrev2_ADC", LIST_ADC, STRING_ADC);
+			testThreeElementList(ABC_listIterSetCAfterPrev3_ABD, "ABC_listIterSetCAfterPrev3_ABD", LIST_ABD, STRING_ABD);
+			
+			
+		}
 		// Iterator concurrency tests
 		test_IterConcurrency();
 		if (SUPPORTS_LIST_ITERATOR) {
@@ -263,12 +321,12 @@ public class ListTester {
 //		case arrayList:
 //			listToUse = new IUArrayList<Integer>();
 //			break;
-		case singleLinkedList:
-			listToUse = new IUSingleLinkedList<Integer>();
-			break;
-//		case doubleLinkedList:
-//			listToUse = new IUDoubleLinkedList<Integer>();
+//		case singleLinkedList:
+//			listToUse = new IUSingleLinkedList<Integer>();
 //			break;
+		case doubleLinkedList:
+			listToUse = new IUDoubleLinkedList<Integer>();
+			break;
 		default:
 			listToUse = null;
 		}
@@ -762,7 +820,7 @@ public class ListTester {
 
 	private Scenario<Integer> ABC_remove0_BC = () -> ABC_remove0_BC();
 
-	/**
+	/**ABC_iterRemoveAfterNextB_AC
 	 * Scenario: [A,B,C] -> remove(1) -> [A,C]
 	 * 
 	 * @return [A,C] after remove(1)
@@ -903,7 +961,349 @@ public class ListTester {
 	}
 	private Scenario<Integer> ABC_iterRemoveAfterNextC_AB = () -> ABC_iterRemoveAfterNextC_AB();
 	
+	/** Scenario: [A,B] -> ListIterator(1) add(C) -> [A,C,B] 
+	 * @return [A,C,B] after ListIterator(1) add(C)
+	 */
+	private IndexedUnsortedList<Integer> AB_listIter1AddC_ACB() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator(1);
+		it.add(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_listIter1AddC_ACB = () -> AB_listIter1AddC_ACB();
 	
+	/** Scenario: [A] -> ListIterRemoveAfterNextA -> [ ] 
+	 * @return [ ] after ListIteratorRemoveAfterNextA
+	 */
+	private IndexedUnsortedList<Integer> A_ListIterRemoveAfterNextA_emptyList() {
+		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> A_ListIterRemoveAfterNextA_emptyList = () -> A_ListIterRemoveAfterNextA_emptyList();
+	
+	/** Scenario: [A,B] -> ListIteratorRemoveAfterNextA -> [B] 
+	 * @return [B] after ListIteratorRemoveAfterNextA
+	 */
+	private IndexedUnsortedList<Integer> AB_ListIterRemoveAfterNextA_B() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> AB_ListIterRemoveAfterNextA_B = () -> AB_ListIterRemoveAfterNextA_B();
+	
+	/** Scenario: [A,B] -> ListIteratorRemoveAfterNextB -> [A] 
+	 * @return [A] after ListIteratorRemoveAfterNextA
+	 */
+	private IndexedUnsortedList<Integer> AB_ListIterRemoveAfterNextB_A() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.next();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> AB_ListIterRemoveAfterNextB_A = () -> AB_ListIterRemoveAfterNextB_A();
+	
+	/** Scenario: [A,B,C] -> ListIteratorRemoveAfterNextA -> [B,C] 
+	 * @return [B,C] after ListIteratorRemoveAfterNextA
+	 */
+	private IndexedUnsortedList<Integer> ABC_ListIterRemoveAfterNextA_BC() {
+		IndexedUnsortedList<Integer> list = AB_add2C_ABC(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> ABC_ListIterRemoveAfterNextA_BC = () -> ABC_ListIterRemoveAfterNextA_BC();
+	
+	/** Scenario: [A,B,C] -> ListIteratorRemoveAfterNextB -> [A,C] 
+	 * @return [A,C] after ListIteratorRemoveAfterNextA
+	 */
+	private IndexedUnsortedList<Integer> ABC_ListIterRemoveAfterNextB_AC() {
+		IndexedUnsortedList<Integer> list = AB_add2C_ABC(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.next();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> ABC_ListIterRemoveAfterNextB_AC = () -> ABC_ListIterRemoveAfterNextB_AC();
+	
+	/** Scenario: [A,B,C] -> ListIteratorRemoveAfterNextB -> [A,B] 
+	 * @return [A,B] after ListIteratorRemoveAfterNextA
+	 */
+	private IndexedUnsortedList<Integer> ABC_ListIterRemoveAfterNextC_AB() {
+		IndexedUnsortedList<Integer> list = AB_add2C_ABC(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.next();
+		it.next();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> ABC_ListIterRemoveAfterNextC_AB = () -> ABC_ListIterRemoveAfterNextC_AB();
+	
+	/** Scenario: [A] -> ListIterator(1) listIter1RemoveAfterPrevious -> [A]
+	 * @return [] after listIter1RemoveAfterPrevious
+	 */
+	private IndexedUnsortedList<Integer> A_listIter1RemoveAfterPrevious_emptyList() {
+		IndexedUnsortedList<Integer> list = emptyList_addA_A();
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> A_listIter1RemoveAfterPrevious_emptyList = () -> A_listIter1RemoveAfterPrevious_emptyList();
+	
+	/** Scenario: [A] -> ListIterator(1) listIter1RemoveAfterPrevious -> []
+	 * @return [] after listIter1RemoveAfterPrevious
+	 */
+	private IndexedUnsortedList<Integer> AB_listIter1RemoveAfterPrevious_B() {
+		IndexedUnsortedList<Integer> list = A_addB_AB();
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> AB_listIter1RemoveAfterPrevious_B = () -> AB_listIter1RemoveAfterPrevious_B();
+	
+	/* Scenario: [A,B] -> listIteratorRemoveAfterPrevious -> [A]
+	 * @return [A] after listIteratorRemoveAfterPrevious
+	 */
+	private IndexedUnsortedList<Integer> AB_listIter2RemoveAfterPrevious_A() {
+		IndexedUnsortedList<Integer> list = A_addB_AB();
+		ListIterator<Integer> it = list.listIterator(2);
+		it.previous();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> AB_listIter2RemoveAfterPrevious_A = () -> AB_listIter2RemoveAfterPrevious_A();
+	
+	private IndexedUnsortedList<Integer> ABC_listIter1RemoveAfterPrevious_BC() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> ABC_listIter1RemoveAfterPrevious_BC = () -> ABC_listIter1RemoveAfterPrevious_BC();
+	
+	private IndexedUnsortedList<Integer> ABC_listIter2RemoveAfterPrevious_AC() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator(2);
+		it.previous();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> ABC_listIter2RemoveAfterPrevious_AC = () -> ABC_listIter2RemoveAfterPrevious_AC();
+	
+	private IndexedUnsortedList<Integer> ABC_listIter3RemoveAfterPrevious_AB() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator(3);
+		it.previous();
+		it.remove();
+		return list;
+	}
+	private Scenario<Integer> ABC_listIter3RemoveAfterPrevious_AB = () -> ABC_listIter3RemoveAfterPrevious_AB();
+
+	
+	private IndexedUnsortedList<Integer> A_listIterSetB_B() {
+		IndexedUnsortedList<Integer> list = emptyList_addA_A();
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.set(ELEMENT_B);
+		return list;
+	}
+	private Scenario<Integer>  A_listIterSetB_B = () ->  A_listIterSetB_B();
+	
+	private IndexedUnsortedList<Integer> AB_listIterSetCAfterNext_CB() {
+		IndexedUnsortedList<Integer> list = A_addB_AB();
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.set(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer>  AB_listIterSetCAfterNext_CB = () ->  AB_listIterSetCAfterNext_CB();
+	
+	private IndexedUnsortedList<Integer> AB_listIterSetCAfterNext2_AC() {
+		IndexedUnsortedList<Integer> list = A_addB_AB();
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.next();
+		it.set(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer>  AB_listIterSetCAfterNext2_AC = () -> AB_listIterSetCAfterNext2_AC();
+	
+	private IndexedUnsortedList<Integer> AB_listIterSetCAfterPrev_CB() {
+		IndexedUnsortedList<Integer> list = A_addB_AB();
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.set(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer>  AB_listIterSetCAfterPrev_CB = () -> AB_listIterSetCAfterPrev_CB();
+	
+	private IndexedUnsortedList<Integer> AB_listIterSetCAfterPrev2_AC() {
+		IndexedUnsortedList<Integer> list = A_addB_AB();
+		ListIterator<Integer> it = list.listIterator(2);
+		it.previous();
+		it.set(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_listIterSetCAfterPrev2_AC = () -> AB_listIterSetCAfterPrev2_AC();
+	
+	private IndexedUnsortedList<Integer> ABC_listIterSetDAfterNext_DBC() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.set(ELEMENT_D);
+		return list;
+	}
+	private Scenario<Integer>  ABC_listIterSetDAfterNext_DBC = () ->  ABC_listIterSetDAfterNext_DBC();
+	
+	private IndexedUnsortedList<Integer> ABC_listIterSetDAfterNext2_ADC() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.next();
+		it.set(ELEMENT_D);
+		return list;
+	}
+	private Scenario<Integer>  ABC_listIterSetDAfterNext2_ADC = () ->  ABC_listIterSetDAfterNext2_ADC();
+	
+	private IndexedUnsortedList<Integer> ABC_listIterSetDAfterNext3_ABD() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.next();
+		it.next();
+		it.set(ELEMENT_D);
+		return list;
+	}
+	private Scenario<Integer>  ABC_listIterSetDAfterNext3_ABD = () ->  ABC_listIterSetDAfterNext3_ABD();
+	
+	private IndexedUnsortedList<Integer> ABC_listIterSetCAfterPrev_DBC() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.set(ELEMENT_D);
+		return list;
+	}
+	private Scenario<Integer> ABC_listIterSetCAfterPrev_DBC = () -> ABC_listIterSetCAfterPrev_DBC();
+	
+	private IndexedUnsortedList<Integer> ABC_listIterSetCAfterPrev2_ADC() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator(2);
+		it.previous();
+		it.set(ELEMENT_D);
+		return list;
+	}
+	private Scenario<Integer> ABC_listIterSetCAfterPrev2_ADC = () -> ABC_listIterSetCAfterPrev2_ADC();
+	
+	private IndexedUnsortedList<Integer> ABC_listIterSetCAfterPrev3_ABD() {
+		IndexedUnsortedList<Integer> list = AB_addC_ABC();
+		ListIterator<Integer> it = list.listIterator(3);
+		it.previous();
+		it.set(ELEMENT_D);
+		return list;
+	}
+	private Scenario<Integer> ABC_listIterSetCAfterPrev3_ABD = () -> ABC_listIterSetCAfterPrev3_ABD();
+	
+	
+	
+	private IndexedUnsortedList<Integer> emptyList_listIterAddA_A() {
+		IndexedUnsortedList<Integer> list = newList();
+		ListIterator<Integer> it = list.listIterator();
+		it.add(ELEMENT_A);
+		return list;
+	}
+	private Scenario<Integer> emptyList_listIterAddA_A = () -> emptyList_listIterAddA_A();
+	
+	private IndexedUnsortedList<Integer> A_listIterAddB_BA() {
+		IndexedUnsortedList<Integer> list = emptyList_addToRearA_A();
+		ListIterator<Integer> it = list.listIterator();
+		it.add(ELEMENT_B);
+		return list;
+	}
+	private Scenario<Integer> A_listIterAddB_BA = () -> A_listIterAddB_BA();
+	
+	private IndexedUnsortedList<Integer> A_listIterAddAfterNextB_AB() {
+		IndexedUnsortedList<Integer> list = emptyList_addToRearA_A();
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.add(ELEMENT_B);
+		return list;
+	}
+	private Scenario<Integer> A_listIterAddAfterNextB_AB = () -> A_listIterAddAfterNextB_AB();
+	
+	private IndexedUnsortedList<Integer> A_listIter1AddAfterPrevA_BA() {
+		IndexedUnsortedList<Integer> list = emptyList_addToRearA_A();
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.add(ELEMENT_B);
+		return list;
+	}
+	private Scenario<Integer> A_listIter1AddAfterPrevA_BA = () -> A_listIter1AddAfterPrevA_BA();
+	
+	private IndexedUnsortedList<Integer> AB_ListIterAddAfterNextC_CAB() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.add(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_ListIterAddAfterNextC_CAB = () -> AB_ListIterAddAfterNextC_CAB();
+	
+	private IndexedUnsortedList<Integer> AB_ListIterAddAfterNextC_ACB() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.add(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_ListIterAddAfterNextC_ACB = () -> AB_ListIterAddAfterNextC_ACB();
+	
+	private IndexedUnsortedList<Integer> AB_ListIterAddAfterNextC_ABC() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator(1);
+		it.next();
+		it.add(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_ListIterAddAfterNextC_ABC = () -> AB_ListIterAddAfterNextC_ABC();
+	
+	private IndexedUnsortedList<Integer> AB_ListIterAddAfterPrevC_CAB() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator(1);
+		it.previous();
+		it.add(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_ListIterAddAfterPrevC_CAB = () -> AB_ListIterAddAfterPrevC_CAB();
+	
+	private IndexedUnsortedList<Integer> AB_ListIter2AddAfterPrevC_ACB() {
+		IndexedUnsortedList<Integer> list = A_add1B_AB(); 
+		ListIterator<Integer> it = list.listIterator(2);
+		it.previous();
+		it.add(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_ListIter2AddAfterPrevC_ACB = () -> AB_ListIter2AddAfterPrevC_ACB();
+	
+	private IndexedUnsortedList<Integer> A_ListIterSetAfterNextB_B() {
+		IndexedUnsortedList<Integer> list = emptyList_addToRearA_A(); 
+		ListIterator<Integer> it = list.listIterator();
+		it.next();
+		it.set(ELEMENT_B);
+		return list;
+	}
+	private Scenario<Integer> A_ListIterSetAfterNextB_B = () -> A_ListIterSetAfterNextB_B();
+
 	/////////////////////////////////
 	// XXX Tests for 0-element list
 	/////////////////////////////////
@@ -957,6 +1357,21 @@ public class ListTester {
 			// ListIterator
 			if (SUPPORTS_LIST_ITERATOR) {
 				// TODO: will add for double-linked list
+			      printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.NoException));
+			      printTest(scenarioName + "_testListIterNeg1", testListIter(scenario.build(), -1, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIter0", testListIter(scenario.build(), 0, Result.NoException));
+			      printTest(scenarioName + "_testListIter1", testListIter(scenario.build(), 1, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIterHasNext", testIterHasNext(scenario.build().listIterator(), Result.False));
+			      printTest(scenarioName + "_testListIterNext", testIterNext(scenario.build().listIterator(), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIterRemove", testIterRemove(scenario.build().listIterator(), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterHasPrevious", testListIterHasPrevious(scenario.build().listIterator(), Result.False));
+			      printTest(scenarioName + "_testListIterPrevious", testListIterPrevious(scenario.build().listIterator(), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIterAdd", testListIterAdd(scenario.build().listIterator(), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterSet", testListIterSet(scenario.build().listIterator(), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextIndex", testListIterNextIndex(scenario.build().listIterator(), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0NextIndex", testListIterNextIndex(scenario.build().listIterator(0), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterPreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(), -1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(0), -1, Result.MatchingValue));
 			} else {
 				printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.UnsupportedOperation));
 				printTest(scenarioName + "_testListIter0",
@@ -1052,6 +1467,58 @@ public class ListTester {
 			// ListIterator
 			if (SUPPORTS_LIST_ITERATOR) {
 				// TODO: will add for double-linked list
+				 printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.NoException));
+			      printTest(scenarioName + "_testListIterNeg1", testListIter(scenario.build(), -1, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIter0", testListIter(scenario.build(), 0, Result.NoException));
+			      printTest(scenarioName + "_testListIter1", testListIter(scenario.build(), 1, Result.NoException));
+			      printTest(scenarioName + "_testListIter2", testListIter(scenario.build(), 2, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIterHasNext", testIterHasNext(scenario.build().listIterator(), Result.True));
+			      printTest(scenarioName + "_testListIterNext", testIterNext(scenario.build().listIterator(), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterNextIndex", testListIterNextIndex(scenario.build().listIterator(), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterHasPrevious", testListIterHasPrevious(scenario.build().listIterator(), Result.False));
+			      printTest(scenarioName + "_testListIterPrevious", testListIterPrevious(scenario.build().listIterator(), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIterPreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(), -1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterRemove", testIterRemove(scenario.build().listIterator(), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterAdd", testListIterAdd(scenario.build().listIterator(), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterSet", testListIterSet(scenario.build().listIterator(), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextRemove", testIterRemove(listIterAfterNext(scenario.build().listIterator(), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextAdd", testListIterAdd(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterNextSet", testListIterSet(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIterNextRemoveRemove", testIterRemove(listIterAfterRemove(listIterAfterNext(scenario.build().listIterator(), 1)), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextPreviousRemove", testIterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextPreviousRemoveRemove", testIterRemove(listIterAfterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1)), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextPreviousAdd", testListIterAdd(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterNextPreviousSet", testListIterSet(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0HasNext", testIterHasNext(scenario.build().listIterator(0), Result.True));
+			      printTest(scenarioName + "_testListIter0Next", testIterNext(scenario.build().listIterator(0), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0NextIndex", testListIterNextIndex(scenario.build().listIterator(0), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0HasPrevious", testListIterHasPrevious(scenario.build().listIterator(0), Result.False));
+			      printTest(scenarioName + "_testListIter0Previous", testListIterPrevious(scenario.build().listIterator(0), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIter0PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(0), -1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0Remove", testIterRemove(scenario.build().listIterator(0), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter0Add", testListIterAdd(scenario.build().listIterator(0), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter0Set", testListIterSet(scenario.build().listIterator(0), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter0NextRemove", testIterRemove(listIterAfterNext(scenario.build().listIterator(0), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextAdd", testListIterAdd(listIterAfterNext(scenario.build().listIterator(0), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter0NextSet", testListIterSet(listIterAfterNext(scenario.build().listIterator(0), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextPreviousRemove", testIterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextPreviousAdd", testListIterAdd(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter0NextPreviousSet", testListIterSet(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter1HasNext", testIterHasNext(scenario.build().listIterator(1), Result.False));
+			      printTest(scenarioName + "_testListIter1Next", testIterNext(scenario.build().listIterator(1), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIter1NextIndex", testListIterNextIndex(scenario.build().listIterator(1), 1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1HasPrevious", testListIterHasPrevious(scenario.build().listIterator(1), Result.True));
+			      printTest(scenarioName + "_testListIter1Previous", testListIterPrevious(scenario.build().listIterator(1), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(1), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1Remove", testIterRemove(scenario.build().listIterator(1), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter1Add", testListIterAdd(scenario.build().listIterator(1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1Set", testListIterSet(scenario.build().listIterator(1), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter1PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousNextRemove", testIterRemove(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousNextAdd", testListIterAdd(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1PreviousNextSet", testListIterSet(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));
 			} else {
 				printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.UnsupportedOperation));
 				printTest(scenarioName + "_testListIter0",
@@ -1167,12 +1634,90 @@ public class ListTester {
 			printTest(scenarioName + "_iterNextRemove_testIterNext", testIterNext(iterAfterRemove(iterAfterNext(scenario.build(), 1)), contents[1], Result.MatchingValue));
 			printTest(scenarioName + "_iterNextRemove_testIterNext2",testIterNext(iterAfterRemove(iterAfterNext(scenario.build(), 2)), null, Result.NoSuchElement));
 			printTest(scenarioName + "_iterNextRemove_testIterRemove",testIterRemove(iterAfterRemove(iterAfterNext(scenario.build(), 1)), Result.IllegalState));
-			printTest(scenarioName + "_iterNextRemove_testIterRemove",testIterRemove(iterAfterRemove(iterAfterNext(scenario.build(), 2)), Result.IllegalState));
 			printTest(scenarioName + "_iterNextRemoveNext_testIterHasNext", testIterNext(iterNextRemoveNext(scenario.build()), null, Result.NoSuchElement));
 			printTest(scenarioName + "_iterNextRemoveNext_testIterNext", testIterHasNext(iterNextRemoveNext(scenario.build()), Result.False));
 			printTest(scenarioName + "_iterNextRemoveNext_testIterHasRemove",testIterRemove(iterNextRemoveNext(scenario.build()), Result.NoException));
 			if (SUPPORTS_LIST_ITERATOR) {
 				// TODO: will add for double-linked list
+				 printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.NoException));
+			      printTest(scenarioName + "_testListIterNeg1", testListIter(scenario.build(), -1, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIter0", testListIter(scenario.build(), 0, Result.NoException));
+			      printTest(scenarioName + "_testListIter1", testListIter(scenario.build(), 1, Result.NoException));
+			      printTest(scenarioName + "_testListIter1", testListIter(scenario.build(), 2, Result.NoException));
+			      printTest(scenarioName + "_testListIter2", testListIter(scenario.build(), 3, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIterHasNext", testIterHasNext(scenario.build().listIterator(), Result.True));
+			      printTest(scenarioName + "_testListIterNext", testIterNext(scenario.build().listIterator(), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterNextIndex", testListIterNextIndex(scenario.build().listIterator(), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterHasPrevious", testListIterHasPrevious(scenario.build().listIterator(), Result.False));
+			      printTest(scenarioName + "_testListIterPrevious", testListIterPrevious(scenario.build().listIterator(), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIterPreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(), -1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterRemove", testIterRemove(scenario.build().listIterator(), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterAdd", testListIterAdd(scenario.build().listIterator(), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterSet", testListIterSet(scenario.build().listIterator(), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextRemove", testIterRemove(listIterAfterNext(scenario.build().listIterator(), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextRemove2", testIterRemove(listIterAfterNext(scenario.build().listIterator(), 2), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextAdd", testListIterAdd(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X, Result.NoException));	
+			      printTest(scenarioName + "_testListIterNextAdd2", testListIterAdd(listIterAfterNext(scenario.build().listIterator(), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIterNextSet", testListIterSet(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIterNextSet2", testListIterSet(listIterAfterNext(scenario.build().listIterator(), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIterNextRemoveRemove", testIterRemove(listIterAfterRemove(listIterAfterNext(scenario.build().listIterator(), 1)), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextPreviousRemove", testIterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextPreviousRemoveRemove", testIterRemove(listIterAfterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1)), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextPreviousAdd", testListIterAdd(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterNextPreviousSet", testListIterSet(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), ELEMENT_X, Result.NoException));
+			      
+			      printTest(scenarioName + "_testListIter0HasNext", testIterHasNext(scenario.build().listIterator(0), Result.True));
+			      printTest(scenarioName + "_testListIter0Next", testIterNext(scenario.build().listIterator(0), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0NextIndex", testListIterNextIndex(scenario.build().listIterator(0), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0HasPrevious", testListIterHasPrevious(scenario.build().listIterator(0), Result.False));
+			      printTest(scenarioName + "_testListIter0Previous", testListIterPrevious(scenario.build().listIterator(0), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIter0PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(0), -1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0Remove", testIterRemove(scenario.build().listIterator(0), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter0Add", testListIterAdd(scenario.build().listIterator(0), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter0Set", testListIterSet(scenario.build().listIterator(0), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter0NextRemove", testIterRemove(listIterAfterNext(scenario.build().listIterator(0), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextRemove2", testIterRemove(listIterAfterNext(scenario.build().listIterator(0), 2), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextAdd", testListIterAdd(listIterAfterNext(scenario.build().listIterator(0), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextAdd2", testListIterAdd(listIterAfterNext(scenario.build().listIterator(0), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextSet", testListIterSet(listIterAfterNext(scenario.build().listIterator(0), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextSet2", testListIterSet(listIterAfterNext(scenario.build().listIterator(0), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextPreviousRemove", testIterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextPreviousAdd", testListIterAdd(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter0NextPreviousSet", testListIterSet(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), ELEMENT_X, Result.NoException));
+			      
+			      printTest(scenarioName + "_testListIter1HasNext", testIterHasNext(scenario.build().listIterator(1), Result.True));
+			      printTest(scenarioName + "_testListIter1Next", testIterNext(scenario.build().listIterator(1), contents[1], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1NextIndex", testListIterNextIndex(scenario.build().listIterator(1), 1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1HasPrevious", testListIterHasPrevious(scenario.build().listIterator(1), Result.True));
+			      printTest(scenarioName + "_testListIter1Previous", testListIterPrevious(scenario.build().listIterator(1), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(1), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1Remove", testIterRemove(scenario.build().listIterator(1), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter1Add", testListIterAdd(scenario.build().listIterator(1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1Set", testListIterSet(scenario.build().listIterator(1), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter1PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousNextRemove", testIterRemove(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousNextAdd", testListIterAdd(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1PreviousNextSet", testListIterSet(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));
+			      
+			      printTest(scenarioName + "_testListIter2HasNext", testIterHasNext(scenario.build().listIterator(2), Result.False));
+			      printTest(scenarioName + "_testListIter2Next", testIterNext(scenario.build().listIterator(2), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIter2NextIndex", testListIterNextIndex(scenario.build().listIterator(2), 2, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter2HasPrevious", testListIterHasPrevious(scenario.build().listIterator(2), Result.True));
+			      printTest(scenarioName + "_testListIter2Previous", testListIterPrevious(scenario.build().listIterator(2), contents[1], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter2PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(2), 1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter2Remove", testIterRemove(scenario.build().listIterator(2), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter2Add", testListIterAdd(scenario.build().listIterator(2), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter2Set", testListIterSet(scenario.build().listIterator(2), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter2PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(2), 2), Result.NoException));
+			      printTest(scenarioName + "_testListIter2PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(2), 2), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter2PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(2), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter2PreviousNextRemove", testIterRemove(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(2), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter2PreviousNextAdd", testListIterAdd(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(2), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter2PreviousNextSet", testListIterSet(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(2), 1), 1), ELEMENT_X, Result.NoException));
+				
+
 			} else {
 				printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.UnsupportedOperation));
 				printTest(scenarioName + "_testListIter0",
@@ -1207,7 +1752,7 @@ public class ListTester {
 			String contentsString) {
 		System.out.printf("\nSCENARIO: %s\n\n", scenarioName);
 		try {
-			// TODO 2-element list
+			// TODO 3-element list
 			// IndexedUnsortedList
 			printTest(scenarioName + "_testRemoveFirst",
 					testRemoveFirst(scenario.build(), contents[0], Result.MatchingValue));
@@ -1316,6 +1861,100 @@ public class ListTester {
 
 			if (SUPPORTS_LIST_ITERATOR) {
 				// TODO: will add for double-linked list
+				 printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.NoException));
+			      printTest(scenarioName + "_testListIterNeg1", testListIter(scenario.build(), -1, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIter0", testListIter(scenario.build(), 0, Result.NoException));
+			      printTest(scenarioName + "_testListIter1", testListIter(scenario.build(), 1, Result.NoException));
+			      printTest(scenarioName + "_testListIter2", testListIter(scenario.build(), 2, Result.NoException));
+			      printTest(scenarioName + "_testListIter3", testListIter(scenario.build(), 3, Result.NoException));
+			      printTest(scenarioName + "_testListIter4", testListIter(scenario.build(), 4, Result.IndexOutOfBounds));
+			      printTest(scenarioName + "_testListIterHasNext", testIterHasNext(scenario.build().listIterator(), Result.True));
+			      printTest(scenarioName + "_testListIterNext", testIterNext(scenario.build().listIterator(), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterNextIndex", testListIterNextIndex(scenario.build().listIterator(), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterHasPrevious", testListIterHasPrevious(scenario.build().listIterator(), Result.False));
+			      printTest(scenarioName + "_testListIterPrevious", testListIterPrevious(scenario.build().listIterator(), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIterPreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(), -1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIterRemove", testIterRemove(scenario.build().listIterator(), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterAdd", testListIterAdd(scenario.build().listIterator(), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterSet", testListIterSet(scenario.build().listIterator(), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextRemove", testIterRemove(listIterAfterNext(scenario.build().listIterator(), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextRemove2", testIterRemove(listIterAfterNext(scenario.build().listIterator(), 2), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextAdd", testListIterAdd(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X, Result.NoException));	
+			      printTest(scenarioName + "_testListIterNextAdd2", testListIterAdd(listIterAfterNext(scenario.build().listIterator(), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIterNextSet", testListIterSet(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIterNextSet2", testListIterSet(listIterAfterNext(scenario.build().listIterator(), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIterNextRemoveRemove", testIterRemove(listIterAfterRemove(listIterAfterNext(scenario.build().listIterator(), 1)), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextPreviousRemove", testIterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIterNextPreviousRemoveRemove", testIterRemove(listIterAfterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1)), Result.IllegalState));
+			      printTest(scenarioName + "_testListIterNextPreviousAdd", testListIterAdd(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIterNextPreviousSet", testListIterSet(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(), 1), 1), ELEMENT_X, Result.NoException));
+			      
+			      printTest(scenarioName + "_testListIter0HasNext", testIterHasNext(scenario.build().listIterator(0), Result.True));
+			      printTest(scenarioName + "_testListIter0Next", testIterNext(scenario.build().listIterator(0), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0NextIndex", testListIterNextIndex(scenario.build().listIterator(0), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0HasPrevious", testListIterHasPrevious(scenario.build().listIterator(0), Result.False));
+			      printTest(scenarioName + "_testListIter0Previous", testListIterPrevious(scenario.build().listIterator(0), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIter0PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(0), -1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter0Remove", testIterRemove(scenario.build().listIterator(0), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter0Add", testListIterAdd(scenario.build().listIterator(0), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter0Set", testListIterSet(scenario.build().listIterator(0), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter0NextRemove", testIterRemove(listIterAfterNext(scenario.build().listIterator(0), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextRemove2", testIterRemove(listIterAfterNext(scenario.build().listIterator(0), 2), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextAdd", testListIterAdd(listIterAfterNext(scenario.build().listIterator(0), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextAdd2", testListIterAdd(listIterAfterNext(scenario.build().listIterator(0), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextSet", testListIterSet(listIterAfterNext(scenario.build().listIterator(0), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextSet2", testListIterSet(listIterAfterNext(scenario.build().listIterator(0), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextPreviousRemove", testIterRemove(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter0NextPreviousAdd", testListIterAdd(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter0NextPreviousSet", testListIterSet(listIterAfterPrevious(listIterAfterNext(scenario.build().listIterator(0), 1), 1), ELEMENT_X, Result.NoException));
+			      
+			      printTest(scenarioName + "_testListIter1HasNext", testIterHasNext(scenario.build().listIterator(1), Result.True));
+			      printTest(scenarioName + "_testListIter1Next", testIterNext(scenario.build().listIterator(1), contents[1], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1NextIndex", testListIterNextIndex(scenario.build().listIterator(1), 1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1HasPrevious", testListIterHasPrevious(scenario.build().listIterator(1), Result.True));
+			      printTest(scenarioName + "_testListIter1Previous", testListIterPrevious(scenario.build().listIterator(1), contents[0], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(1), 0, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter1Remove", testIterRemove(scenario.build().listIterator(1), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter1Add", testListIterAdd(scenario.build().listIterator(1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1Set", testListIterSet(scenario.build().listIterator(1), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter1PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousNextRemove", testIterRemove(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter1PreviousNextAdd", testListIterAdd(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter1PreviousNextSet", testListIterSet(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));
+			      
+			      printTest(scenarioName + "_testListIter2HasNext", testIterHasNext(scenario.build().listIterator(2), Result.True));
+			      printTest(scenarioName + "_testListIter2Next", testIterNext(scenario.build().listIterator(2), contents[2], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter2NextIndex", testListIterNextIndex(scenario.build().listIterator(2), 2, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter2HasPrevious", testListIterHasPrevious(scenario.build().listIterator(2), Result.True));
+			      printTest(scenarioName + "_testListIter2Previous", testListIterPrevious(scenario.build().listIterator(2), contents[1], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter2PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(2), 1, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter2Remove", testIterRemove(scenario.build().listIterator(2), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter2Add", testListIterAdd(scenario.build().listIterator(2), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter2Set", testListIterSet(scenario.build().listIterator(2), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter2PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(2), 2), Result.NoException));
+			      printTest(scenarioName + "_testListIter2PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(2), 2), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter2PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(2), 2), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter2PreviousNextRemove", testIterRemove(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(2), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter2PreviousNextAdd", testListIterAdd(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(2), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter2PreviousNextSet", testListIterSet(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(2), 1), 1), ELEMENT_X, Result.NoException));
+			      
+			      printTest(scenarioName + "_testListIter3HasNext", testIterHasNext(scenario.build().listIterator(3), Result.False));
+			      printTest(scenarioName + "_testListIter3Next", testIterNext(scenario.build().listIterator(3), null, Result.NoSuchElement));
+			      printTest(scenarioName + "_testListIter3NextIndex", testListIterNextIndex(scenario.build().listIterator(3), 3, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter3HasPrevious", testListIterHasPrevious(scenario.build().listIterator(3), Result.True));
+			      printTest(scenarioName + "_testListIter3Previous", testListIterPrevious(scenario.build().listIterator(3), contents[2], Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter3PreviousIndex", testListIterPreviousIndex(scenario.build().listIterator(3), 2, Result.MatchingValue));
+			      printTest(scenarioName + "_testListIter3Remove", testIterRemove(scenario.build().listIterator(3), Result.IllegalState));
+			      printTest(scenarioName + "_testListIter3Add", testListIterAdd(scenario.build().listIterator(3), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter3Set", testListIterSet(scenario.build().listIterator(3), ELEMENT_X, Result.IllegalState));
+			      printTest(scenarioName + "_testListIter3PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(3), 3), Result.NoException));
+			      printTest(scenarioName + "_testListIter3PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(3), 3), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter3PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(3), 3), ELEMENT_X, Result.NoException));
+			      printTest(scenarioName + "_testListIter3PreviousNextRemove", testIterRemove(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(3), 1), 1), Result.NoException));
+			      printTest(scenarioName + "_testListIter3PreviousNextAdd", testListIterAdd(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(3), 1), 1), ELEMENT_X, Result.NoException));			
+			      printTest(scenarioName + "_testListIter3PreviousNextSet", testListIterSet(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(3), 1), 1), ELEMENT_X, Result.NoException));
 			} else {
 				printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.UnsupportedOperation));
 				printTest(scenarioName + "_testListIter0",
@@ -2639,6 +3278,7 @@ public class ListTester {
 		}
 	}
 
+	
 	////////////////////////////////////////////////////////
 	// XXX ListIterator Concurrency Tests
 	// Will add tests for double-linked list
@@ -2648,7 +3288,1261 @@ public class ListTester {
 	private void test_ListIterConcurrency() {
 		System.out.println("\nListIterator Concurrency Tests\n");
 		try {
-			// TODO: will add for double-linked list
+			printTest("emptyList_testConcurrentListIter", testListIterConcurrent(newList(), Result.NoException));
+			printTest("emptyList_testConcurrentListIter00", testListIterConcurrent(newList(), 0, 0, Result.NoException));
+
+			IndexedUnsortedList<Integer> list = newList();
+			ListIterator<Integer> it1 = list.listIterator();
+			ListIterator<Integer> it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2HasNext", testIterHasNext(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2Next", testIterNext(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2Remove", testIterRemove(it2, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2Previous", testListIterPrevious(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2AddA", testListIterAdd(it2, ELEMENT_A, Result.NoException));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2SetA", testListIterSet(it2, ELEMENT_A, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.MatchingValue));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasNext();
+			printTest("emptyList_ListIter1HasNext_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.MatchingValue));
+
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2HasNext", testIterHasNext(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2Next", testIterNext(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2Remove", testIterRemove(it2, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2Previous", testListIterPrevious(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2AddA", testListIterAdd(it2, ELEMENT_A, Result.NoException));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2SetA", testListIterSet(it2, ELEMENT_A, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.MatchingValue));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.hasPrevious();
+			printTest("emptyList_ListIter1HasPrevious_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.MatchingValue));
+
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2HasNext", testIterHasNext(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2Next", testIterNext(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2Remove", testIterRemove(it2, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2Previous", testListIterPrevious(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2AddA", testListIterAdd(it2, ELEMENT_A, Result.NoException));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2SetA", testListIterSet(it2, ELEMENT_A, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.MatchingValue));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.nextIndex();
+			printTest("emptyList_ListIter1NextIndex_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.MatchingValue));
+
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2HasNext", testIterHasNext(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2Next", testIterNext(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2Remove", testIterRemove(it2, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.False));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2Previous", testListIterPrevious(it2, null, Result.NoSuchElement));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2AddA", testListIterAdd(it2, ELEMENT_A, Result.NoException));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2SetA", testListIterSet(it2, ELEMENT_A, Result.IllegalState));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.MatchingValue));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.previousIndex();
+			printTest("emptyList_ListIter1PreviousIndex_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.MatchingValue));
+
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2HasNext", testIterHasNext(it2, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2Next", testIterNext(it2, null, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2Remove", testIterRemove(it2, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2Previous", testListIterPrevious(it2, null, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			//it2.add(ELEMENT_B);//maybe remove that
+			printTest("emptyList_ListIter1AddA_testListIter2SetA", testListIterSet(it2, ELEMENT_A, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.ConcurrentModification));
+			list = newList();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.add(ELEMENT_A);
+			printTest("emptyList_ListIter1AddA_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2HasNext", testIterHasNext(it2, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2Next", testIterNext(it2, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2Remove", testIterRemove(it2, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2Previous", testListIterPrevious(it2, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2SetB", testListIterSet(it2, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.MatchingValue));
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			printTest("A_ListIter1Next_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2HasNext", testIterHasNext(it2, Result.True));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2Next", testIterNext(it2, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2Remove", testIterRemove(it2, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.False));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2Previous", testListIterPrevious(it2, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2SetB", testListIterSet(it2, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.MatchingValue));
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			printTest("A_ListIter1Previous_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2HasNext", testIterHasNext(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2Next", testIterNext(it2, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2Remove", testIterRemove(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2Previous", testListIterPrevious(it2, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2SetB", testListIterSet(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.remove();
+			printTest("A_ListIter1NextRemove_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2HasNext", testIterHasNext(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2Next", testIterNext(it2, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2Remove", testIterRemove(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2Previous", testListIterPrevious(it2, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2SetB", testListIterSet(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.remove();
+			printTest("A_ListIter1PreviousRemove_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2HasNext", testIterHasNext(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2Next", testIterNext(it2, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2Remove", testIterRemove(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2Previous", testListIterPrevious(it2, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2SetB", testListIterSet(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			it2 = list.listIterator();
+			it1.next();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1NextSetB_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2HasNext", testIterHasNext(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2Next", testIterNext(it2, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2Remove", testIterRemove(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2Previous", testListIterPrevious(it2, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2SetB", testListIterSet(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.previous();
+			it1.set(ELEMENT_B);
+			printTest("A_ListIter1PreviousSetB_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2HasNext", testIterHasNext(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2Next", testIterNext(it2, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2Remove", testIterRemove(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2HasPrevious", testListIterHasPrevious(it2, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2Previous", testListIterPrevious(it2, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2AddB", testListIterAdd(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2SetB", testListIterSet(it2, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2NextIndex", testListIterNextIndex(it2, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it2 = list.listIterator();
+			it1 = list.listIterator(1);
+			it1.add(ELEMENT_B);
+			printTest("A_ListIter11AddB_testListIter2PreviousIndex", testListIterPreviousIndex(it2, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeLast_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterPreviousConcurrent", testListIterPrevious(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeFirst();
+			printTest("A_removeFirst_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterPreviousConcurrent", testListIterPrevious(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.removeLast();
+			printTest("A_removeLast_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeLast_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterPreviousConcurrent", testListIterPrevious(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(ELEMENT_A);
+			printTest("A_removeA_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.first();
+			printTest("A_first_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.last();
+			printTest("A_last_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.contains(ELEMENT_A);
+			printTest("A_containsA_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.isEmpty();
+			printTest("A_isEmpty_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.size();
+			printTest("A_size_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.toString();
+			printTest("A_toString_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterNextConcurrent", testIterNext(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToFront(ELEMENT_B);
+			printTest("A_addToFrontB_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterNextConcurrent", testIterNext(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addToRear(ELEMENT_B);
+			printTest("A_addToRearB_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.addAfter(ELEMENT_B, ELEMENT_A);
+			printTest("A_addAfterAB_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0,ELEMENT_B);
+			printTest("A_add0B_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0,ELEMENT_B);
+			printTest("A_add0B_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0,ELEMENT_B);
+			printTest("A_add0B_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0, ELEMENT_B);
+			printTest("A_add0B_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0, ELEMENT_B);
+			printTest("A_add0B_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0, ELEMENT_B);
+			printTest("A_add0B_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0, ELEMENT_B);
+			printTest("A_add0B_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0, ELEMENT_B);
+			printTest("A_add0B_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(0, ELEMENT_B);
+			printTest("A_add0B_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0,ELEMENT_B);
+			printTest("A_set0B_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0,ELEMENT_B);
+			printTest("A_set0B_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0,ELEMENT_B);
+			printTest("A_set0B_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0, ELEMENT_B);
+			printTest("A_set0B_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0, ELEMENT_B);
+			printTest("A_set0B_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0, ELEMENT_B);
+			printTest("A_set0B_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0, ELEMENT_B);
+			printTest("A_set0B_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0, ELEMENT_B);
+			printTest("A_set0B_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.set(0, ELEMENT_B);
+			printTest("A_set0B_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.add(ELEMENT_B);
+			printTest("A_addB_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.get(0);
+			printTest("A_get0_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterHasNextConcurrent", testIterHasNext(it1, Result.True));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterRemoveConcurrent", testIterRemove(it1, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.False));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.NoSuchElement));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.NoException));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.IllegalState));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.MatchingValue));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.indexOf(ELEMENT_A);
+			printTest("A_indexOfA_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.MatchingValue));
+
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterHasNextConcurrent", testIterHasNext(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterNextConcurrent", testIterNext(it1, ELEMENT_A, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterRemoveConcurrent", testIterRemove(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterHasPreviousConcurrent", testListIterHasPrevious(it1, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterPreviousConcurrent", testListIterPrevious(it1, null, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterAddBConcurrent", testListIterAdd(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterSetBConcurrent", testListIterSet(it1, ELEMENT_B, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterNextIndexConcurrent", testListIterNextIndex(it1, 0, Result.ConcurrentModification));
+			list = emptyList_addToFrontA_A();
+			it1 = list.listIterator();
+			list.remove(0);
+			printTest("A_remove0_testListIterPreviousIndexConcurrent", testListIterPreviousIndex(it1, -1, Result.ConcurrentModification));
 		} catch (Exception e) {
 			System.out.printf("***UNABLE TO RUN/COMPLETE %s***\n", "test_ListIterConcurrency");
 			e.printStackTrace();

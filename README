@@ -1,0 +1,118 @@
+****************
+* DoubleLinkedList
+* CS 221-2
+* 11/13/2018
+* Devan Craig
+**************** 
+
+OVERVIEW:
+
+ Double Linked List is a two-way node based implementation of IndexedUnsortedList.
+ An Iterator with working remove() method is implemented and a
+ ListIterator that is supported and uses working methods set(), 
+ add() nextIndex(), and previousIndex(). 
+
+
+INCLUDED FILES:
+
+ IUDoubleLinkedList.java - source file
+ ListTester.java - source file
+ Node.java - source file
+ IndexedUnsortedList.java - source file
+ README - this file
+
+
+BUILDING AND RUNNING:
+
+ From the directory containing all source files, compile the test
+ class (and all dependent classes) with the command:
+ $ javac ListTester.java
+
+ Run the compiled ListTester class with the command:
+ $ java listTester
+
+ Console output will report which tests IUDoubleLinkedList passed or failed.
+ 
+
+PROGRAM DESIGN:
+
+ The main idea of the double linked list versus the single linked list is now
+ instead of only being able to go next you can now go to the previous node allowing you 
+ to go both directions. For all my methods I had to take into account for next and previous 
+ movements. With that being said I would need to check in most every method if it was the 
+ head or tail to see if I could move to the next or to the previous. After 
+ checking head and tail I had to check for the middle cases. This was the basic
+ set up to most of my methods.  
+
+ There's two main class that I created to make this program work, IUDoubleLInkedList
+ and ListTester. My double linked list class has two separate section within it,
+ first being the normal methods. The normal methods use an implementation of 
+ IndexUnsortedList interface that holds all of regular methods that I used (add, remove, etc.). 
+ The Second section is for the iterator methods with used an implementation of my 
+ Node class. The Node class gives basic methods that should be used in list 
+ iterator methods of double linked list class.  
+ 
+ ListTester was a class created to test and see if the methods in the double
+ linked list where functioning properly. List tester class was compiled with
+ change scenarios, tests using methods in IndexedUnsortedList and tests for
+ List Iterator. Each of these tests where used in order to try and break the 
+ methods within the double linked list. If test would fail they would print 
+ to the console what scenario and the physical test being done. 
+
+TESTING:
+ 
+ ListTester is a class used to test the methods with double linked list.
+ ListTester was created before double linked list to help make sure that
+ the methods would work right away. 
+
+ Some Scenarios being tested by ListTester include:
+   a new empty set
+   adding the first element to an empty set
+   removing the element from a one element set
+   adding a duplicate element to a set with one element
+   adding a second element to a set with one element
+   removing each of the two elements in a two element set
+   adding a third element to a two element set
+   removing each of the three elements from a three element set
+   
+   Iterator Test:
+   iterator remove after next from a one element set to a empty list
+   iterator remove after next from a two element set to a single element set 
+   iterator remove after next from a three element set to a two element set
+   iterator remove after previous from a one element set to a empty list
+   iterator remove after previous from a two element set to a single element set 
+   iterator remove after previous from a three element set to a two element set
+   
+  Testing currently at 100% with 82 change scenarios, and to my knowledge I believe
+  my program takes in just about every type of situation that can or will happen. 
+   
+DISCUSSION:
+ 
+ Creating the test class behind Test-driven development is a new skill for me. 
+ In the past I've been given test classes that where completed, but in this case
+ I had to create most of it myself. It pushed me by making me add things to the 
+ test class in order to make these test function. For instance, adding the test
+ scenarios or just adding the actual test in general. I may not have learned 
+ everything about how to make a fully function tester on my own, but I can take this
+ knowledge I've learned and most likely make one of my own. 
+ 
+ The one thing that was hard to wrap my head around and took me awhile to understand 
+ was how to properly code methods in the double linked list. In the single linked list
+ I only had to work on a one way moving node, but with the double I could now traverse
+ either way. This concept took some time, but I finally figured out how previous and next 
+ where working. Knowing now how they are used to go either direction in the list it clicked 
+ in my head and I could write each of the methods easier. 
+ 
+ While programming the methods and checking them with the list tester class I found 
+ errors constantly. These errors where anywhere from concurrent errors to actually methods
+ that where failing tests. To fix the concurrent errors I found out that I needed to add a modCount++
+ to my set methods, adding it to my set methods instantly made the errors go away. When I 
+ got an error on specific methods I then would go into that method and draw it out to make sure it 
+ functioned properly on paper. Every time that I wrote out what the method was doing I could 
+ see the issue quickly. This slowly became a go to thing for me to do whenever I got an fail 
+ on a specific test method. 
+  
+ 
+
+
+ 
